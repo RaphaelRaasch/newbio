@@ -23,90 +23,100 @@ class _AuthPageState extends ModularState<AuthPage, AuthController> {
     return Scaffold(body: Observer(
       builder: (context) {
         return Container(
-          decoration: BoxDecoration(
-            color: colorA,
-          ),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: sw * 0.06),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: colorC,
-                    borderRadius: BorderRadius.circular(sw * 0.06),
-                  ),
-                  height: sh * 0.7,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: sw * 0.03),
-                        height: sh * 0.3,
+            decoration: BoxDecoration(
+              color: colorA,
+            ),
+            child: Observer(
+              builder: (context) {
+                return Center(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: sw * 0.06),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: colorC,
+                          borderRadius: BorderRadius.circular(sw * 0.06),
+                        ),
+                        height: sh * 0.7,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            FormWidget(
-                              hint: 'Email',
-                              obscure: false,
-                              type: TextInputType.emailAddress,
-                              onChanged: (value) {
-                                controller.email = value;
-                              },
+                            Container(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: sw * 0.03),
+                              height: sh * 0.3,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FormWidget(
+                                    hint: 'Email',
+                                    obscure: false,
+                                    type: TextInputType.emailAddress,
+                                    onChanged: (value) {
+                                      controller.email = value;
+                                    },
+                                  ),
+                                  FormWidget(
+                                    hint: 'Password',
+                                    obscure: controller.ispassword == false
+                                        ? true
+                                        : false,
+                                    type: TextInputType.text,
+                                    onChanged: (value) {
+                                      controller.password = value;
+                                    },
+                                  ),
+                                  controller.password.isEmpty
+                                      ? SizedBox()
+                                      : Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            FlatButton(
+                                              onPressed: () {
+                                                controller.viewPassword();
+                                              },
+                                              child: Text(
+                                                'View Password',
+                                                style: TextStyle(color: colorA),
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                ],
+                              ),
                             ),
-                            FormWidget(
-                              hint: 'Password',
-                              obscure:
-                                  controller.ispassword == false ? true : false,
-                              type: TextInputType.text,
-                              onChanged: (value) {
-                                controller.password = value;
-                              },
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.vertical(
+                                  bottom: Radius.circular(sw * 0.06),
+                                ),
+                              ),
+                              height: sh * 0.1,
+                              width: sw,
+                              child: controller.loading == true
+                                  ? Center(
+                                      child: CircularProgressIndicator(),
+                                    )
+                                  : FlatButton(
+                                      onPressed: () {
+                                        controller.login();
+                                      },
+                                      child: Text(
+                                        'Acessar',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
                             ),
-                            controller.password.isEmpty
-                                ? SizedBox()
-                                : Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      FlatButton(
-                                        onPressed: () {
-                                          controller.viewPassword();
-                                        },
-                                        child: Text(
-                                          'View Password',
-                                          style: TextStyle(color: colorA),
-                                        ),
-                                      )
-                                    ],
-                                  )
                           ],
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.vertical(
-                            bottom: Radius.circular(sw * 0.06),
-                          ),
-                        ),
-                        height: sh * 0.1,
-                        width: sw,
-                        child: FlatButton(
-                          onPressed: () {
-                            controller.login();
-                          },
-                          child: Text(
-                            'Acessar',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            ),
-          ),
-        );
+                );
+              },
+            ));
       },
     ));
   }

@@ -37,26 +37,30 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         builder: (context) {
           return Container(
             height: sh,
-            child: ListView.builder(
-              itemCount: controller.listMtr.length,
-              itemBuilder: (context, index) {
-                var list = controller.listMtr[index];
-                if (user.userId != list.mtr.motorista) {
-                  return CardWidget(
-                    title: list.mtr.alias,
-                    caminhao: list.mtr.caminhao,
-                    onTap: () {
-                      Modular.link.pushNamed(
-                        '/sequencia',
-                        arguments: list.sequencia,
-                      );
+            child: controller.listMtr.isEmpty
+                ? Center(
+                    child: Text('SEM MTRS CONFIGURADAS'),
+                  )
+                : ListView.builder(
+                    itemCount: controller.listMtr.length,
+                    itemBuilder: (context, index) {
+                      var list = controller.listMtr[index];
+                      if (user.userId == list.mtr.motorista) {
+                        return CardWidget(
+                          title: list.mtr.alias,
+                          caminhao: list.mtr.caminhao,
+                          onTap: () {
+                            Modular.link.pushNamed(
+                              '/sequencia',
+                              arguments: list.sequencia,
+                            );
+                          },
+                        );
+                      } else {
+                        SizedBox();
+                      }
                     },
-                  );
-                } else {
-                  SizedBox();
-                }
-              },
-            ),
+                  ),
           );
         },
       ),

@@ -1,3 +1,5 @@
+import 'map/map_controller.dart';
+import 'custom_map/custom_map_controller.dart';
 import 'sequencia/card_sequencia/card_sequencia_controller.dart';
 import 'package:biodriver/app/modules/home/sequencia/sequencia_page.dart';
 
@@ -11,7 +13,9 @@ import 'home_page.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => CardSequenciaController),
+        Bind((i) => MapController()),
+        Bind((i) => CustomMapController()),
+        Bind((i) => CardSequenciaController()),
         Bind((i) => SequenciaController()),
         Bind((i) => CardController()),
         Bind((i) => HomeController()),

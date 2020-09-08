@@ -26,6 +26,7 @@ dependencies:
   flutter_mobx: ^1.1.0+2
   mobx: ^1.2.1+2
   flutter_modular: ^2.0.0+1
+  google_maps_flutter: ^0.5.28+1
   flutter:
     sdk: flutter
 

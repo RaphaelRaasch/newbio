@@ -24,14 +24,17 @@ abstract class _AuthControllerBase with Store {
   @observable
   String password = '';
 
+  @observable
+  bool loading = false;
   @action
   void viewPassword() => ispassword = !ispassword;
 
   @action
   Future login() async {
+    loading = true;
     var response = await http.post(
       AUTH_URL,
-      body: ({'username': 'raaschraphael@gmail.com', 'password': 'rafa1254'}),
+      body: ({'username': email, 'password': password}),
     );
     print(response.statusCode);
     print(response.body);
@@ -42,7 +45,9 @@ abstract class _AuthControllerBase with Store {
       print(userStore.user.email);
 
       Modular.to.pushReplacementNamed('/home');
+      loading = false;
     } else {
+      loading = false;
       return;
     }
   }
