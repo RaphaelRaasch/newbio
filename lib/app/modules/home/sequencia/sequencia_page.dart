@@ -4,6 +4,8 @@ import 'package:biodriver/app/modules/model/sequencia_model.dart';
 import 'package:biodriver/app/shared/style/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../../shared/style/colors.dart';
+import '../../../shared/style/colors.dart';
 import 'sequencia_controller.dart';
 
 class SequenciaPage extends StatefulWidget {
@@ -49,6 +51,10 @@ class _SequenciaPageState
                           borderRadius:
                               BorderRadius.circular(20.0)), //this right here
                       child: Container(
+                        decoration: BoxDecoration(
+                          color: colorA,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
                         height: sh * 0.6,
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
@@ -58,7 +64,10 @@ class _SequenciaPageState
                             children: [
                               Container(
                                 height: sh * 0.5,
-                                color: Colors.white,
+                                decoration: BoxDecoration(
+                                  color: colorA,
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
                                 child: Center(
                                   child: MapWidget(
                                       lat: double.tryParse(seq.lat),
@@ -71,15 +80,24 @@ class _SequenciaPageState
                                 children: [
                                   IconButton(
                                     icon: Icon(
+                                      Icons.person_add,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      controller.setLatLng(seq.cliente);
+                                    },
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
                                       Icons.person,
-                                      color: colorA,
+                                      color: Colors.white,
                                     ),
                                     onPressed: () {},
                                   ),
                                   IconButton(
                                     icon: Icon(
                                       Icons.navigation,
-                                      color: colorA,
+                                      color: Colors.white,
                                     ),
                                     onPressed: () {},
                                   ),

@@ -47,7 +47,7 @@ class CardWidget extends StatelessWidget {
                 height: sh * 0.03,
               ),
               Text(
-                'Caminhao: ${caminhao}',
+                'Caminhao: $caminhao',
                 style: TextStyle(fontSize: sh * 0.02),
               ),
             ],

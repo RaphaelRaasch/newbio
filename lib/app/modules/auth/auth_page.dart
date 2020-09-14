@@ -16,108 +16,127 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends ModularState<AuthPage, AuthController> {
   //use 'controller' variable to access controller
 
+  final snackBar = SnackBar(
+    content: Text('Yay! A SnackBar!'),
+    action: SnackBarAction(
+      label: 'Undo',
+      onPressed: () {
+        // Some code to undo the change.
+      },
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     double sh = MediaQuery.of(context).size.height;
     double sw = MediaQuery.of(context).size.width;
-    return Scaffold(body: Observer(
-      builder: (context) {
-        return Container(
-            decoration: BoxDecoration(
-              color: colorA,
-            ),
-            child: Observer(
-              builder: (context) {
-                return Center(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: sw * 0.06),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: colorC,
-                          borderRadius: BorderRadius.circular(sw * 0.06),
-                        ),
-                        height: sh * 0.7,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: sw * 0.03),
-                              height: sh * 0.3,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FormWidget(
-                                    hint: 'Email',
-                                    obscure: false,
-                                    type: TextInputType.emailAddress,
-                                    onChanged: (value) {
-                                      controller.email = value;
-                                    },
-                                  ),
-                                  FormWidget(
-                                    hint: 'Password',
-                                    obscure: controller.ispassword == false
-                                        ? true
-                                        : false,
-                                    type: TextInputType.text,
-                                    onChanged: (value) {
-                                      controller.password = value;
-                                    },
-                                  ),
-                                  controller.password.isEmpty
-                                      ? SizedBox()
-                                      : Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            FlatButton(
-                                              onPressed: () {
-                                                controller.viewPassword();
-                                              },
-                                              child: Text(
-                                                'View Password',
-                                                style: TextStyle(color: colorA),
-                                              ),
-                                            )
-                                          ],
-                                        )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.vertical(
-                                  bottom: Radius.circular(sw * 0.06),
+    return Scaffold(
+      body: Observer(
+        builder: (context) {
+          return Container(
+              decoration: BoxDecoration(
+                color: colorA,
+              ),
+              child: Observer(
+                builder: (context) {
+                  return Center(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: sw * 0.06),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: colorC,
+                            borderRadius: BorderRadius.circular(sw * 0.06),
+                          ),
+                          height: sh * 0.7,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: sw * 0.03),
+                                height: sh * 0.3,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FormWidget(
+                                      hint: 'Email',
+                                      obscure: false,
+                                      type: TextInputType.emailAddress,
+                                      onChanged: (value) {
+                                        controller.email = value;
+                                      },
+                                    ),
+                                    FormWidget(
+                                      hint: 'Password',
+                                      obscure: controller.ispassword == false
+                                          ? true
+                                          : false,
+                                      type: TextInputType.text,
+                                      onChanged: (value) {
+                                        controller.password = value;
+                                      },
+                                    ),
+                                    controller.password.isEmpty
+                                        ? SizedBox()
+                                        : Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              FlatButton(
+                                                onPressed: () {
+                                                  controller.viewPassword();
+                                                },
+                                                child: Text(
+                                                  'View Password',
+                                                  style:
+                                                      TextStyle(color: colorA),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                    controller.error == false
+                                        ? SizedBox()
+                                        : Text(
+                                            'Email ou senha incorretos',
+                                            style: TextStyle(color: Colors.red),
+                                          )
+                                  ],
                                 ),
                               ),
-                              height: sh * 0.1,
-                              width: sw,
-                              child: controller.loading == true
-                                  ? Center(
-                                      child: CircularProgressIndicator(),
-                                    )
-                                  : FlatButton(
-                                      onPressed: () {
-                                        controller.login();
-                                      },
-                                      child: Text(
-                                        'Acessar',
-                                        style: TextStyle(color: Colors.white),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.vertical(
+                                    bottom: Radius.circular(sw * 0.06),
+                                  ),
+                                ),
+                                height: sh * 0.1,
+                                width: sw,
+                                child: controller.loading == true
+                                    ? Center(
+                                        child: CircularProgressIndicator(),
+                                      )
+                                    : FlatButton(
+                                        onPressed: () {
+                                          controller.login(context, snackBar);
+                                        },
+                                        child: Text(
+                                          'Acessar',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                       ),
-                                    ),
-                            ),
-                          ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              },
-            ));
-      },
-    ));
+                  );
+                },
+              ));
+        },
+      ),
+    );
   }
 }

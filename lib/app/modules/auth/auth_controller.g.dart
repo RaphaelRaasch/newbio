@@ -54,6 +54,21 @@ mixin _$AuthController on _AuthControllerBase, Store {
     });
   }
 
+  final _$errorAtom = Atom(name: '_AuthControllerBase.error');
+
+  @override
+  bool get error {
+    _$errorAtom.reportRead();
+    return super.error;
+  }
+
+  @override
+  set error(bool value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
+    });
+  }
+
   final _$loadingAtom = Atom(name: '_AuthControllerBase.loading');
 
   @override
@@ -72,8 +87,8 @@ mixin _$AuthController on _AuthControllerBase, Store {
   final _$loginAsyncAction = AsyncAction('_AuthControllerBase.login');
 
   @override
-  Future<dynamic> login() {
-    return _$loginAsyncAction.run(() => super.login());
+  Future<dynamic> login(dynamic context, dynamic snackbar) {
+    return _$loginAsyncAction.run(() => super.login(context, snackbar));
   }
 
   final _$_AuthControllerBaseActionController =
@@ -96,6 +111,7 @@ mixin _$AuthController on _AuthControllerBase, Store {
 ispassword: ${ispassword},
 email: ${email},
 password: ${password},
+error: ${error},
 loading: ${loading}
     ''';
   }

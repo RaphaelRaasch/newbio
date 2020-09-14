@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:biodriver/app/modules/model/mtr_item_model.dart';
 import 'package:biodriver/app/modules/model/sequencia_model.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobx/mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'home_controller.g.dart';
 
@@ -33,5 +35,11 @@ abstract class _HomeControllerBase with Store {
       );
       return listMtr;
     }
+  }
+
+  exit() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    Modular.to.pushReplacementNamed('/auth');
   }
 }

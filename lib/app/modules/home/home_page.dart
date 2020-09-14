@@ -32,36 +32,59 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       appBar: AppBar(
         title: Text('${user.firstName} ${user.lastName}'),
         backgroundColor: colorA,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              controller.exit();
+            },
+          ),
+        ],
       ),
       body: Observer(
         builder: (context) {
-          return Container(
-            height: sh,
-            child: controller.listMtr.isEmpty
-                ? Center(
-                    child: Text('SEM MTRS CONFIGURADAS'),
-                  )
-                : ListView.builder(
-                    itemCount: controller.listMtr.length,
-                    itemBuilder: (context, index) {
-                      var list = controller.listMtr[index];
-                      if (user.userId == list.mtr.motorista) {
-                        return CardWidget(
-                          title: list.mtr.alias,
-                          caminhao: list.mtr.caminhao,
-                          onTap: () {
-                            Modular.link.pushNamed(
-                              '/sequencia',
-                              arguments: list.sequencia,
-                            );
-                          },
-                        );
-                      } else {
-                        SizedBox();
-                      }
-                    },
-                  ),
-          );
+          if (controller.listMtr.isEmpty) {
+            return Center(
+              child: Text('Nenhuma Mtr Cadastrada'),
+            );
+          } else {
+            return Container(
+              height: sh,
+              child: controller.listMtr.isEmpty
+                  ? Center(
+                      child: Text('SEM MTRS CONFIGURADAS'),
+                    )
+                  : ListView.builder(
+                      itemCount: controller.listMtr.length,
+                      itemBuilder: (context, index) {
+                        var list = controller.listMtr[index];
+                        if (user.userId == list.mtr.motorista) {
+                          return CardWidget(
+                            title: list.mtr.alias,
+                            caminhao: list.mtr.caminhao,
+                            onTap: () {
+                              Modular.link.pushNamed(
+                                '/sequencia',
+                                arguments: list.sequencia,
+                              );
+                            },
+                          );
+                        } else if (user.type == '1') {
+                          return CardWidget(
+                            title: list.mtr.alias,
+                            caminhao: list.mtr.caminhao,
+                            onTap: () {
+                              Modular.link.pushNamed(
+                                '/sequencia',
+                                arguments: list.sequencia,
+                              );
+                            },
+                          );
+                        }
+                      },
+                    ),
+            );
+          }
         },
       ),
     );

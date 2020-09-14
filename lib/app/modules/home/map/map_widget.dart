@@ -48,7 +48,7 @@ class _MapWidgetState extends State<MapWidget> {
         zoomGesturesEnabled: false,
         scrollGesturesEnabled: false,
         markers: Set.from(marker),
-        mapToolbarEnabled: false,
+        mapToolbarEnabled: true,
         onMapCreated: (controller) {
           print(widget.lat);
           print(widget.lng);
