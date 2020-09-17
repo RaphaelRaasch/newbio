@@ -4,7 +4,7 @@ class Mtr {
   String alias;
   String saida;
   String chegada;
-  String caminhao;
+  int caminhao;
 
   Mtr(
       {this.numero,

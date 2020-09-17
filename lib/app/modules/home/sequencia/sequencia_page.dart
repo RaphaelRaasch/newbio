@@ -84,7 +84,7 @@ class _SequenciaPageState
                                       color: Colors.white,
                                     ),
                                     onPressed: () {
-                                      controller.setLatLng(seq.cliente);
+                                      //  controller.setLatLng(seq.cliente);
                                     },
                                   ),
                                   IconButton(
@@ -99,7 +99,9 @@ class _SequenciaPageState
                                       Icons.navigation,
                                       color: Colors.white,
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      controller.getLocation(seq.cliente);
+                                    },
                                   ),
                                 ],
                               )
