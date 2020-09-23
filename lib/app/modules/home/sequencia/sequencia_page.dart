@@ -4,7 +4,7 @@ import 'package:biodriver/app/modules/model/sequencia_model.dart';
 import 'package:biodriver/app/shared/style/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../../shared/style/colors.dart';
+import 'package:map_launcher/map_launcher.dart';
 import '../../../shared/style/colors.dart';
 import 'sequencia_controller.dart';
 
@@ -100,7 +100,9 @@ class _SequenciaPageState
                                       color: Colors.white,
                                     ),
                                     onPressed: () {
-                                      controller.getLocation(seq.cliente);
+                                      double lat = double.tryParse(seq.lat);
+                                      double lng = double.tryParse(seq.long);
+                                      openMapsSheet(context, index, lat, lng);
                                     },
                                   ),
                                 ],
@@ -118,5 +120,51 @@ class _SequenciaPageState
         ),
       ),
     );
+  }
+
+  openMapsSheet(context, index, lat, lng) async {
+    try {
+      final title = widget.sequencia[index].cliente.toString();
+      final description = widget.sequencia[index].cliente.toString();
+      final coords = Coords(lat, lng);
+      final availableMaps = await MapLauncher.installedMaps;
+
+      print(availableMaps);
+
+      showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SafeArea(
+            child: SingleChildScrollView(
+              child: Container(
+                child: Wrap(
+                  children: <Widget>[
+                    for (var map in availableMaps)
+                      ListTile(
+                        onTap: () {
+                          map.showMarker(
+                            coords: coords,
+                            title: title,
+                            description: description,
+                          );
+                          controller.getLocation();
+                        },
+                        title: Text(map.mapName),
+                        leading: Image(
+                          image: map.icon,
+                          height: 30.0,
+                          width: 30.0,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      print(e);
+    }
   }
 }

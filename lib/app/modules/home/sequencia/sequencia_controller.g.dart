@@ -9,18 +9,33 @@ part of 'sequencia_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SequenciaController on _SequenciaControllerBase, Store {
-  final _$viagemAtom = Atom(name: '_SequenciaControllerBase.viagem');
+  final _$latAtom = Atom(name: '_SequenciaControllerBase.lat');
 
   @override
-  ViagemModel get viagem {
-    _$viagemAtom.reportRead();
-    return super.viagem;
+  double get lat {
+    _$latAtom.reportRead();
+    return super.lat;
   }
 
   @override
-  set viagem(ViagemModel value) {
-    _$viagemAtom.reportWrite(value, super.viagem, () {
-      super.viagem = value;
+  set lat(double value) {
+    _$latAtom.reportWrite(value, super.lat, () {
+      super.lat = value;
+    });
+  }
+
+  final _$lngAtom = Atom(name: '_SequenciaControllerBase.lng');
+
+  @override
+  double get lng {
+    _$lngAtom.reportRead();
+    return super.lng;
+  }
+
+  @override
+  set lng(double value) {
+    _$lngAtom.reportWrite(value, super.lng, () {
+      super.lng = value;
     });
   }
 
@@ -40,51 +55,42 @@ mixin _$SequenciaController on _SequenciaControllerBase, Store {
     });
   }
 
-  final _$latitudeAtom = Atom(name: '_SequenciaControllerBase.latitude');
+  final _$gestorAtom = Atom(name: '_SequenciaControllerBase.gestor');
 
   @override
-  String get latitude {
-    _$latitudeAtom.reportRead();
-    return super.latitude;
+  String get gestor {
+    _$gestorAtom.reportRead();
+    return super.gestor;
   }
 
   @override
-  set latitude(String value) {
-    _$latitudeAtom.reportWrite(value, super.latitude, () {
-      super.latitude = value;
+  set gestor(String value) {
+    _$gestorAtom.reportWrite(value, super.gestor, () {
+      super.gestor = value;
     });
   }
 
-  final _$longitudeAtom = Atom(name: '_SequenciaControllerBase.longitude');
+  final _$doneAtom = Atom(name: '_SequenciaControllerBase.done');
 
   @override
-  String get longitude {
-    _$longitudeAtom.reportRead();
-    return super.longitude;
+  bool get done {
+    _$doneAtom.reportRead();
+    return super.done;
   }
 
   @override
-  set longitude(String value) {
-    _$longitudeAtom.reportWrite(value, super.longitude, () {
-      super.longitude = value;
+  set done(bool value) {
+    _$doneAtom.reportWrite(value, super.done, () {
+      super.done = value;
     });
-  }
-
-  final _$updateLocationAsyncAction =
-      AsyncAction('_SequenciaControllerBase.updateLocation');
-
-  @override
-  Future<dynamic> updateLocation(dynamic id, dynamic lat, dynamic lng) {
-    return _$updateLocationAsyncAction
-        .run(() => super.updateLocation(id, lat, lng));
   }
 
   final _$getLocationAsyncAction =
       AsyncAction('_SequenciaControllerBase.getLocation');
 
   @override
-  Future<dynamic> getLocation(dynamic cliente) {
-    return _$getLocationAsyncAction.run(() => super.getLocation(cliente));
+  Future<dynamic> getLocation() {
+    return _$getLocationAsyncAction.run(() => super.getLocation());
   }
 
   final _$_SequenciaControllerBaseActionController =
@@ -104,10 +110,11 @@ mixin _$SequenciaController on _SequenciaControllerBase, Store {
   @override
   String toString() {
     return '''
-viagem: ${viagem},
+lat: ${lat},
+lng: ${lng},
 positionStream: ${positionStream},
-latitude: ${latitude},
-longitude: ${longitude}
+gestor: ${gestor},
+done: ${done}
     ''';
   }
 }

@@ -13,7 +13,7 @@ part 'auth_controller.g.dart';
 @Injectable()
 class AuthController = _AuthControllerBase with _$AuthController;
 
-const AUTH_URL = 'http://192.168.2.21:8080/auth-token/';
+const AUTH_URL = 'http://multidev.com.br/biotrack/auth-token/';
 
 abstract class _AuthControllerBase with Store {
   final UserStore userStore;
@@ -41,7 +41,7 @@ abstract class _AuthControllerBase with Store {
         AUTH_URL,
         body: ({
           'username': 'raaschraphael@gmail.com',
-          'password': 'raphael1254'
+          'password': 'rafa1254'
         }),
       );
       print(response.statusCode);

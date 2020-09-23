@@ -1,3 +1,4 @@
+import 'map_launcher/map_launcher_controller.dart';
 import 'map/map_controller.dart';
 import 'custom_map/custom_map_controller.dart';
 import 'sequencia/card_sequencia/card_sequencia_controller.dart';
@@ -13,6 +14,7 @@ import 'home_page.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => MapLauncherController()),
         Bind((i) => MapController()),
         Bind((i) => CustomMapController()),
         Bind((i) => CardSequenciaController()),

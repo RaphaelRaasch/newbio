@@ -21,7 +21,7 @@ abstract class _HomeControllerBase with Store {
 
   @action
   Future getMtr() async {
-    var response = await http.get('http://192.168.2.21:8080/api/mtritems/');
+    var response = await http.get('http://multidev.com.br/biotrack/api/mtritems/');
     print(response.statusCode);
     print(response.body);
     if (response.statusCode == 200) {

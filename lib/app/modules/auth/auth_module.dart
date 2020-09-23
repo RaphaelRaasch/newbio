@@ -17,7 +17,7 @@ class AuthModule extends ChildModule {
 
   @override
   List<ModularRouter> get routers => [
-        //ModularRouter('/', child: (_, args) => SplashPage()),
+        ModularRouter('/', child: (_, args) => SplashPage()),
         ModularRouter('/auth', child: (_, args) => AuthPage()),
       ];
 
