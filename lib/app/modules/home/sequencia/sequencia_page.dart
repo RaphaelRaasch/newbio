@@ -43,6 +43,7 @@ class _SequenciaPageState
               municipio: seq.municipio,
               rua: seq.rua,
               onLongPress: () {
+                controller.getCliente(seq.cliente);
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -83,9 +84,7 @@ class _SequenciaPageState
                                       Icons.person_add,
                                       color: Colors.white,
                                     ),
-                                    onPressed: () {
-                                      //  controller.setLatLng(seq.cliente);
-                                    },
+                                    onPressed: () {},
                                   ),
                                   IconButton(
                                     icon: Icon(
@@ -94,17 +93,50 @@ class _SequenciaPageState
                                     ),
                                     onPressed: () {},
                                   ),
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.navigation,
-                                      color: Colors.white,
-                                    ),
-                                    onPressed: () {
-                                      double lat = double.tryParse(seq.lat);
-                                      double lng = double.tryParse(seq.long);
-                                      openMapsSheet(context, index, lat, lng);
-                                    },
-                                  ),
+                                  controller.initialized == false
+                                      ? IconButton(
+                                          icon: Icon(
+                                            Icons.navigation,
+                                            color: Colors.white,
+                                          ),
+                                          onPressed: () {
+                                            double lat =
+                                                double.tryParse(seq.lat);
+                                            double lng =
+                                                double.tryParse(seq.long);
+                                            openMapsSheet(context, index, lat,
+                                                lng, seq.cliente);
+                                          },
+                                        )
+                                      : IconButton(
+                                          icon: Icon(
+                                            Icons.refresh,
+                                            color: Colors.white,
+                                          ),
+                                          onPressed: () {
+                                            double lat =
+                                                double.tryParse(seq.lat);
+                                            double lng =
+                                                double.tryParse(seq.long);
+                                            openMapsSheet(context, index, lat,
+                                                lng, seq.cliente);
+                                          },
+                                        ),
+                                  controller.initialized == true
+                                      ? IconButton(
+                                          icon: Icon(
+                                            Icons.check,
+                                            color: Colors.white,
+                                          ),
+                                          onPressed: () {
+                                            controller.completed = true;
+                                            controller.finalTrack(seq.id);
+                                            Modular.link
+                                                .pushReplacementNamed('/');
+                                            setState(() {});
+                                          },
+                                        )
+                                      : SizedBox()
                                 ],
                               )
                             ],
@@ -122,7 +154,7 @@ class _SequenciaPageState
     );
   }
 
-  openMapsSheet(context, index, lat, lng) async {
+  openMapsSheet(context, index, lat, lng, gestor) async {
     try {
       final title = widget.sequencia[index].cliente.toString();
       final description = widget.sequencia[index].cliente.toString();
@@ -147,7 +179,7 @@ class _SequenciaPageState
                             title: title,
                             description: description,
                           );
-                          controller.getLocation();
+                          controller.getLocation(gestor);
                         },
                         title: Text(map.mapName),
                         leading: Image(

@@ -1,4 +1,5 @@
 class Sequencia {
+  int id;
   int numero;
   int mtr;
   int cliente;
@@ -11,7 +12,8 @@ class Sequencia {
   String long;
 
   Sequencia(
-      {this.numero,
+      {this.id,
+      this.numero,
       this.mtr,
       this.cliente,
       this.nomeCliente,
@@ -23,6 +25,7 @@ class Sequencia {
       this.long});
 
   Sequencia.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     numero = json['numero'];
     mtr = json['mtr'];
     cliente = json['cliente'];
@@ -37,6 +40,7 @@ class Sequencia {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['numero'] = this.numero;
     data['mtr'] = this.mtr;
     data['cliente'] = this.cliente;

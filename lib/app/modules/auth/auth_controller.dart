@@ -39,10 +39,7 @@ abstract class _AuthControllerBase with Store {
       loading = true;
       var response = await http.post(
         AUTH_URL,
-        body: ({
-          'username': 'raaschraphael@gmail.com',
-          'password': 'rafa1254'
-        }),
+        body: ({'username': email, 'password': password}),
       );
       print(response.statusCode);
       print(response.body);

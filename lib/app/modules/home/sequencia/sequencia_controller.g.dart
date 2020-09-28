@@ -85,19 +85,80 @@ mixin _$SequenciaController on _SequenciaControllerBase, Store {
     });
   }
 
+  final _$completedAtom = Atom(name: '_SequenciaControllerBase.completed');
+
+  @override
+  bool get completed {
+    _$completedAtom.reportRead();
+    return super.completed;
+  }
+
+  @override
+  set completed(bool value) {
+    _$completedAtom.reportWrite(value, super.completed, () {
+      super.completed = value;
+    });
+  }
+
+  final _$initializedAtom = Atom(name: '_SequenciaControllerBase.initialized');
+
+  @override
+  bool get initialized {
+    _$initializedAtom.reportRead();
+    return super.initialized;
+  }
+
+  @override
+  set initialized(bool value) {
+    _$initializedAtom.reportWrite(value, super.initialized, () {
+      super.initialized = value;
+    });
+  }
+
+  final _$clienteAtom = Atom(name: '_SequenciaControllerBase.cliente');
+
+  @override
+  ClienteModel get cliente {
+    _$clienteAtom.reportRead();
+    return super.cliente;
+  }
+
+  @override
+  set cliente(ClienteModel value) {
+    _$clienteAtom.reportWrite(value, super.cliente, () {
+      super.cliente = value;
+    });
+  }
+
+  final _$getClienteAsyncAction =
+      AsyncAction('_SequenciaControllerBase.getCliente');
+
+  @override
+  Future<dynamic> getCliente(dynamic clienteID) {
+    return _$getClienteAsyncAction.run(() => super.getCliente(clienteID));
+  }
+
   final _$getLocationAsyncAction =
       AsyncAction('_SequenciaControllerBase.getLocation');
 
   @override
-  Future<dynamic> getLocation() {
-    return _$getLocationAsyncAction.run(() => super.getLocation());
+  Future<dynamic> getLocation(dynamic gestor) {
+    return _$getLocationAsyncAction.run(() => super.getLocation(gestor));
+  }
+
+  final _$finalTrackAsyncAction =
+      AsyncAction('_SequenciaControllerBase.finalTrack');
+
+  @override
+  Future<dynamic> finalTrack(dynamic id) {
+    return _$finalTrackAsyncAction.run(() => super.finalTrack(id));
   }
 
   final _$_SequenciaControllerBaseActionController =
       ActionController(name: '_SequenciaControllerBase');
 
   @override
-  Stream<Position> streamPosition() {
+  Stream<StreamSubscription<Position>> streamPosition() {
     final _$actionInfo = _$_SequenciaControllerBaseActionController.startAction(
         name: '_SequenciaControllerBase.streamPosition');
     try {
@@ -114,7 +175,10 @@ lat: ${lat},
 lng: ${lng},
 positionStream: ${positionStream},
 gestor: ${gestor},
-done: ${done}
+done: ${done},
+completed: ${completed},
+initialized: ${initialized},
+cliente: ${cliente}
     ''';
   }
 }

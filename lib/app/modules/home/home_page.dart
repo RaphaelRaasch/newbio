@@ -87,6 +87,12 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           }
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.getMtr();
+        },
+        child: Icon(Icons.refresh),
+      ),
     );
   }
 }
