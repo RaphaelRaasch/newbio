@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:biodriver/app/modules/model/motorista_model.dart';
 import 'package:biodriver/app/modules/model/user_model.dart';
+import 'package:biodriver/app/modules/store/motorista_store.dart';
 import 'package:biodriver/app/modules/store/user_store.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -17,8 +19,9 @@ const AUTH_URL = 'http://multidev.com.br/biotrack/auth-token/';
 
 abstract class _AuthControllerBase with Store {
   final UserStore userStore;
+  final MotoristaStore motoristaStore;
 
-  _AuthControllerBase(this.userStore);
+  _AuthControllerBase(this.userStore, this.motoristaStore);
   @observable
   bool ispassword = false;
   @observable
@@ -30,6 +33,7 @@ abstract class _AuthControllerBase with Store {
 
   @observable
   bool loading = false;
+
   @action
   void viewPassword() => ispassword = !ispassword;
 
@@ -49,6 +53,8 @@ abstract class _AuthControllerBase with Store {
         userStore.setUser(user);
         print(userStore.user.email);
         setToken(userStore.user.token, email, password);
+        
+        print(userStore.user.email);
 
         Modular.to.pushReplacementNamed('/home');
         loading = false;

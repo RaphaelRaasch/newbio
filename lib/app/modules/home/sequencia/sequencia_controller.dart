@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:biodriver/app/modules/model/cliente_model_model.dart';
 import 'package:biodriver/app/modules/store/user_store.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

@@ -29,6 +29,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     var user = userStore.user;
     double sh = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Colors.grey[600],
       appBar: AppBar(
         title: Text('${user.firstName} ${user.lastName}'),
         backgroundColor: colorA,
@@ -58,29 +59,16 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       itemCount: controller.listMtr.length,
                       itemBuilder: (context, index) {
                         var list = controller.listMtr[index];
-                        if (user.userId == list.mtr.motorista) {
-                          return CardWidget(
-                            title: list.mtr.alias,
-                            caminhao: list.mtr.caminhao,
-                            onTap: () {
-                              Modular.link.pushNamed(
-                                '/sequencia',
-                                arguments: list.sequencia,
-                              );
-                            },
-                          );
-                        } else if (user.type == '1') {
-                          return CardWidget(
-                            title: list.mtr.alias,
-                            caminhao: list.mtr.caminhao,
-                            onTap: () {
-                              Modular.link.pushNamed(
-                                '/sequencia',
-                                arguments: list.sequencia,
-                              );
-                            },
-                          );
-                        }
+                        return CardWidget(
+                          title: list.mtr.alias,
+                          caminhao: list.mtr.caminhao,
+                          onTap: () {
+                            Modular.link.pushNamed(
+                              '/sequencia',
+                              arguments: list.sequencia,
+                            );
+                          },
+                        );
                       },
                     ),
             );

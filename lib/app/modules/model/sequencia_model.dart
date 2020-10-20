@@ -29,7 +29,7 @@ class Sequencia {
     numero = json['numero'];
     mtr = json['mtr'];
     cliente = json['cliente'];
-    nomeCliente = json['nome_cliente'];
+    nomeCliente = json['cliente_nome'];
     rua = json['rua'];
     bairro = json['bairro'];
     municipio = json['municipio'];
@@ -44,7 +44,7 @@ class Sequencia {
     data['numero'] = this.numero;
     data['mtr'] = this.mtr;
     data['cliente'] = this.cliente;
-    data['nome_cliente'] = this.nomeCliente;
+    data['cliente_nome'] = this.nomeCliente;
     data['rua'] = this.rua;
     data['bairro'] = this.bairro;
     data['municipio'] = this.municipio;

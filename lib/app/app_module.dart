@@ -1,3 +1,4 @@
+import 'modules/store/motorista_store.dart';
 import 'modules/store/user_store.dart';
 import 'package:biodriver/app/modules/auth/auth_module.dart';
 
@@ -10,6 +11,7 @@ import 'package:biodriver/app/modules/home/home_module.dart';
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => MotoristaStore()),
         Bind((i) => UserStore()),
         Bind((i) => AppController()),
       ];

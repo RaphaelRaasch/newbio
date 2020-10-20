@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class CardSequenciaWidget extends StatelessWidget {
   final id;
+  final nome;
   final idClient;
   final rua;
   final municipio;
@@ -11,6 +12,7 @@ class CardSequenciaWidget extends StatelessWidget {
   const CardSequenciaWidget({
     Key key,
     this.id,
+    this.nome,
     this.idClient,
     this.rua,
     this.municipio,
@@ -29,7 +31,6 @@ class CardSequenciaWidget extends StatelessWidget {
         child: Container(
           padding:
               EdgeInsets.symmetric(horizontal: sw * 0.06, vertical: sh * 0.02),
-          height: sh * 0.2,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(sw * 0.03),
@@ -48,34 +49,21 @@ class CardSequenciaWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('ID: $id'),
-                  Text('ID Client $idClient'),
+                  Text('$nome #$id'),
                 ],
               ),
               SizedBox(
-                height: sh * 0.03,
+                height: sh * 0.02,
               ),
               Container(
                 width: sw * 0.6,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Rua: $rua'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Municipio: $municipio'),
-                        Text('Estado: $estado'),
-                      ],
-                    ),
+                    Text('$rua, $municipio, $estado'),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

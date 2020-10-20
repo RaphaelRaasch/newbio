@@ -27,6 +27,7 @@ class _SequenciaPageState
     double sh = MediaQuery.of(context).size.height;
     double sw = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.grey[600],
       appBar: AppBar(
         title: Text(widget.title),
         backgroundColor: colorA,
@@ -38,6 +39,7 @@ class _SequenciaPageState
             var seq = widget.sequencia[index];
             return CardSequenciaWidget(
               id: seq.numero,
+              nome: seq.nomeCliente,
               estado: seq.estado,
               idClient: seq.nomeCliente,
               municipio: seq.municipio,

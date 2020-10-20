@@ -12,12 +12,12 @@ class AuthModule extends ChildModule {
   List<Bind> get binds => [
         Bind((i) => SplashController(i.get())),
         Bind((i) => FormController()),
-        Bind((i) => AuthController(Modular.get())),
+        Bind((i) => AuthController(Modular.get(), i.get())),
       ];
 
   @override
   List<ModularRouter> get routers => [
-        //ModularRouter('/', child: (_, args) => SplashPage()),
+        ModularRouter('/', child: (_, args) => SplashPage()),
         ModularRouter('/auth', child: (_, args) => AuthPage()),
       ];
 

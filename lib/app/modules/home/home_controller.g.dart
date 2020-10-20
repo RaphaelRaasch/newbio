@@ -55,6 +55,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$listUserAtom = Atom(name: '_HomeControllerBase.listUser');
+
+  @override
+  ObservableList<MotoristaModel> get listUser {
+    _$listUserAtom.reportRead();
+    return super.listUser;
+  }
+
+  @override
+  set listUser(ObservableList<MotoristaModel> value) {
+    _$listUserAtom.reportWrite(value, super.listUser, () {
+      super.listUser = value;
+    });
+  }
+
   final _$getMtrAsyncAction = AsyncAction('_HomeControllerBase.getMtr');
 
   @override
@@ -67,7 +82,8 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return '''
 observableFuture: ${observableFuture},
 clientList: ${clientList},
-listMtr: ${listMtr}
+listMtr: ${listMtr},
+listUser: ${listUser}
     ''';
   }
 }
